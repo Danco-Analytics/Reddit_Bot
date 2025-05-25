@@ -7,8 +7,8 @@ import random
 REDDIT_CLIENT_ID = "vEW0UrVrMw9rAc8VAtr_lg"
 REDDIT_CLIENT_SECRET = "tyhSZUJ9fnFLhHh_SkPRfHKzmSom_g"
 REDDIT_USER_AGENT = "All_Gas_No_Brakes_Bot v0.1 by u/No_Court_5398"
-REDDIT_BOT_USERNAME = "YOUR_BOT_USERNAME_HERE"
-REDDIT_BOT_PASSWORD = "YOUR_BOT_PASSWORD_HERE"
+REDDIT_BOT_USERNAME = "All_Gas_No_Brakes"
+REDDIT_BOT_PASSWORD = "4805640@Kmt"
 
 GEMINI_API_KEY = "AIzaSyCOyiZkk8t7zFtX4zC9G4v66MPJfgjIi84"
 
@@ -80,7 +80,7 @@ def run_bot():
         return
 
     print("Initializing Reddit instance...")
-    if REDDIT_BOT_USERNAME == "YOUR_BOT_USERNAME_HERE" or REDDIT_BOT_PASSWORD == "YOUR_BOT_PASSWORD_HERE":
+    if REDDIT_BOT_USERNAME == "All_Gas_No_Brakes" or REDDIT_BOT_PASSWORD == "4805640@Kmt":
         print("CRITICAL ERROR: You MUST set your bot's Reddit username and password (REDDIT_BOT_USERNAME, REDDIT_BOT_PASSWORD).")
         return
 
@@ -174,8 +174,8 @@ def run_bot():
 if __name__ == "__main__":
     if GEMINI_API_KEY == "AIzaSyCOyiZkk8t7zFtX4zC9G4v66MPJfgjIi84" or "YOUR_GEMINI_API_KEY" in GEMINI_API_KEY : # Basic check
         print("INFO: Using the provided Gemini API key. Ensure it is correct and active.")
-    
-    if REDDIT_BOT_USERNAME == "YOUR_BOT_USERNAME_HERE" or REDDIT_BOT_PASSWORD == "YOUR_BOT_PASSWORD_HERE":
+
+    if REDDIT_BOT_USERNAME == "All_Gas_No_Brakes" or REDDIT_BOT_PASSWORD == "4805640@Kmt":
         print("CRITICAL ERROR: You MUST set your bot's Reddit username and password (REDDIT_BOT_USERNAME, REDDIT_BOT_PASSWORD) in the script.")
         print("This should be for a dedicated bot account, NOT your personal Reddit account or developer account.")
     else:
