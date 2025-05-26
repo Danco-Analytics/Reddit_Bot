@@ -19,7 +19,7 @@ GEMINI_API_KEY = "AIzaSyCOyiZkk8t7zFtX4zC9G4v66MPJfgjIi84" # <--- VERIFY/CHANGE 
 TARGET_SUBREDDITS = ["learnpython", "AskReddit", "testingground4bots", "BotTown", "jokes", "puns"]
 REPLY_INTERVAL_SECONDS = 15 * 60
 PROCESSED_ITEMS_FILE = "processed_items_gemini.txt"
-BOT_DISCLAIMER = "\n\n---\n\n*I'm All_Gas_No_Brakes, an AI bot with a penchant for puns and a byte of dark humor. This reply was auto-generated with Gemini.*"
+BOT_DISCLAIMER = "\n\n---\n\n*I'm All_Gas_No_Brakes*"
 LOG_FILE = "bot_activity_log.txt" # Added for logging
 
 # --- Logging Function ---
@@ -126,7 +126,7 @@ def run_bot():
         return
 
     log_message("Initializing Reddit instance...")
-    if REDDIT_BOT_PASSWORD == "YourBotAccountPassword_Must_Change" or REDDIT_BOT_USERNAME == "YOUR_BOT_USERNAME_HERE": # Simplified check
+    if REDDIT_BOT_PASSWORD == "4805640@Kmt" or REDDIT_BOT_USERNAME == "All_Gas_No_Brakes": # Simplified check
         log_message("CRITICAL ERROR: Update placeholder REDDIT_BOT_USERNAME and REDDIT_BOT_PASSWORD with your bot's actual credentials.")
         return
 
@@ -255,8 +255,8 @@ def run_bot():
 
 if __name__ == "__main__":
     log_message("Starting Reddit Bot All_Gas_No_Brakes...")
-    
-    if REDDIT_BOT_USERNAME == "YOUR_BOT_USERNAME_HERE" or REDDIT_BOT_PASSWORD == "YourBotAccountPassword_Must_Change": # Check again
+
+    if REDDIT_BOT_USERNAME == "All_Gas_No_Brakes" or REDDIT_BOT_PASSWORD == "4805640@Kmt": # Check again
         log_message("CRITICAL ERROR: Bot username or password are still placeholders. Please edit the script.")
     elif not GEMINI_API_KEY or "YOUR_GEMINI_API_KEY" in GEMINI_API_KEY or "AIzaSyC" not in GEMINI_API_KEY :
         log_message("CRITICAL ERROR: Gemini API key is missing or a placeholder. Please edit the script.")

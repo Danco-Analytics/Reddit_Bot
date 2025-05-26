@@ -1,0 +1,16 @@
+[2025-05-26 02:54:11] VADER lexicon not found. On your server, run Python, then: import nltk; nltk.download('vader_lexicon'); nltk.download('punkt')
+[2025-05-26 02:54:11] Gemini API configured successfully.
+[2025-05-26 02:54:11] Starting Reddit Bot All_Gas_No_Brakes...
+[2025-05-26 02:54:11] CRITICAL ERROR: Bot username or password are still placeholders. Please edit the script.
+[2025-05-26 02:54:11] Bot script finished or exited.
+[2025-05-26 02:56:28] VADER lexicon not found. On your server, run Python, then: import nltk; nltk.download('vader_lexicon'); nltk.download('punkt')
+[2025-05-26 02:56:28] Gemini API configured successfully.
+[2025-05-26 02:56:28] Starting Reddit Bot All_Gas_No_Brakes...
+[2025-05-26 02:56:28] CRITICAL ERROR: Sentiment analyzer (VADER) failed to load. Please ensure NLTK data is downloaded (vader_lexicon, punkt).
+[2025-05-26 02:56:28] Bot script finished or exited.
+[2025-05-26 03:00:28] SentimentIntensityAnalyzer loaded successfully.
+[2025-05-26 03:00:28] Gemini API configured successfully.
+[2025-05-26 03:00:28] Starting Reddit Bot All_Gas_No_Brakes...
+[2025-05-26 03:00:28] Initializing Reddit instance...
+[2025-05-26 03:00:29] Failed to log in to Reddit: invalid_grant error processing request
+[2025-05-26 03:00:29] Bot script finished or exited.
