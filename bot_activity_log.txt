@@ -35,3 +35,8 @@
 [2025-05-26 03:18:23] Starting Reddit Bot All_Gas_No_Brakes...
 [2025-05-26 03:18:23] CRITICAL ERROR: Bot username or password are still placeholders. Please edit the script.
 [2025-05-26 03:18:23] Bot script finished or exited.
+[2025-05-26 03:32:37] SentimentIntensityAnalyzer loaded successfully.
+[2025-05-26 03:32:37] Gemini API key is missing, a placeholder, or seems invalid. Please check .env file.
+[2025-05-26 03:32:37] Starting Reddit Bot All_Gas_No_Brakes (dotenv version)...
+[2025-05-26 03:32:37] CRITICAL ERROR: One or more Reddit credentials (client ID, secret, user agent, bot username, bot password) are missing from .env file.
+[2025-05-26 03:32:37] Bot script finished or exited.
