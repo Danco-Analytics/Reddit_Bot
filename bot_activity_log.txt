@@ -40,3 +40,38 @@
 [2025-05-26 03:32:37] Starting Reddit Bot All_Gas_No_Brakes (dotenv version)...
 [2025-05-26 03:32:37] CRITICAL ERROR: One or more Reddit credentials (client ID, secret, user agent, bot username, bot password) are missing from .env file.
 [2025-05-26 03:32:37] Bot script finished or exited.
+[2025-05-26 03:35:10] SentimentIntensityAnalyzer loaded successfully.
+[2025-05-26 03:35:10] Gemini API key is missing, a placeholder, or seems invalid. Please check .env file.
+[2025-05-26 03:35:10] Starting Reddit Bot All_Gas_No_Brakes (dotenv version)...
+[2025-05-26 03:35:10] CRITICAL ERROR: One or more Reddit credentials (client ID, secret, user agent, bot username, bot password) are missing from .env file.
+[2025-05-26 03:35:10] Bot script finished or exited.
+[2025-05-26 03:37:39] SentimentIntensityAnalyzer loaded successfully.
+[2025-05-26 03:37:39] Gemini API configured successfully.
+[2025-05-26 03:37:39] Starting Reddit Bot All_Gas_No_Brakes (dotenv version)...
+[2025-05-26 03:37:39] Initializing Reddit instance...
+[2025-05-26 03:37:42] Successfully logged in as Reddit user: No_Court_5398
+[2025-05-26 03:37:42] Loaded 0 processed item IDs.
+[2025-05-26 03:37:42] --- Starting new scan cycle at 2025-05-26 03:37:42 ---
+[2025-05-26 03:37:42] Scanning subreddit: r/testingground4bots
+[2025-05-26 03:37:42] Post 'my babe...' (ID: 1kvdpji) sentiment: 0.00
+[2025-05-26 03:37:43] Post 'abe...' (ID: 1kvbu9j) sentiment: 0.00
+[2025-05-26 03:37:43] Post 'This is a test post from my bo...' (ID: 1kv6jxe) sentiment: 0.00
+[2025-05-26 03:37:43] Post 'What's your opinion on the lat...' (ID: 1ku83u4) sentiment: 0.70
+[2025-05-26 03:37:44] Post 'Test...' (ID: 1ktvrsu) sentiment: 0.00
+[2025-05-26 03:37:44] Selected comment (ID: mtwv5bv) by u/googleEnPassantBot25 under post 'Test...'
+[2025-05-26 03:37:44] Upvoting comment ID mtwv5bv
+[2025-05-26 03:37:45] Generating Gemini reply for: "Test..."
+[2025-05-26 03:37:46] Error calling Gemini API: 404 models/gemini-pro is not found for API version v1beta, or is not supported for generateContent. Call ListModels to see the list of available models and their supported methods.
+[2025-05-26 03:37:46] Gemini did not generate a suitable reply for comment mtwv5bv.
+[2025-05-26 03:37:50] Post 'this is a beauty...' (ID: 1krior1) sentiment: 0.59
+[2025-05-26 03:37:50] Post 'Hello test...' (ID: 1kqjrcf) sentiment: 0.00
+[2025-05-26 03:37:51] Post 'Hello testy...' (ID: 1kqjvga) sentiment: 0.00
+[2025-05-26 03:37:51] Post 'Hello test...' (ID: 1kqjv7u) sentiment: 0.00
+[2025-05-26 03:37:52] Post 'Hello test...' (ID: 1kqjqxm) sentiment: 0.00
+[2025-05-26 03:37:52] Post 'Hello test...' (ID: 1kqjqre) sentiment: 0.00
+[2025-05-26 03:37:52] Post 'Hello test...' (ID: 1kqjopq) sentiment: 0.00
+[2025-05-26 03:37:53] Post 'Hello test...' (ID: 1kqjo0w) sentiment: 0.00
+[2025-05-26 03:37:53] Post 'Hello test...' (ID: 1kqjj4q) sentiment: 0.00
+[2025-05-26 03:37:54] Post 'Hello test...' (ID: 1kqixwy) sentiment: 0.00
+[2025-05-26 03:37:54] No new suitable posts/comments found to reply to in this cycle.
+[2025-05-26 03:37:54] --- Cycle finished. Waiting for 15 minutes. ---

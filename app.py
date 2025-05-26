@@ -8,6 +8,7 @@ from nltk.sentiment.vader import SentimentIntensityAnalyzer
 from dotenv import load_dotenv
 
 # Load environment variables from .env file
+# Ensure this script is in the same directory as your .env file
 load_dotenv()
 
 # --- Configuration from Environment Variables ---
@@ -15,15 +16,18 @@ REDDIT_APP_CLIENT_ID = os.getenv("REDDIT_APP_CLIENT_ID")
 REDDIT_APP_CLIENT_SECRET = os.getenv("REDDIT_APP_CLIENT_SECRET")
 REDDIT_APP_USER_AGENT = os.getenv("REDDIT_APP_USER_AGENT")
 
-# IMPORTANT: These should be for the BOT's account, not your developer account
-REDDIT_BOT_USERNAME = os.getenv("REDDIT_BOT_USERNAME")
-REDDIT_BOT_PASSWORD = os.getenv("REDDIT_BOT_PASSWORD")
+REDDIT_BOT_USERNAME = os.getenv("REDDIT_BOT_USERNAME") # For the account the bot posts AS
+REDDIT_BOT_PASSWORD = os.getenv("REDDIT_BOT_PASSWORD") # Password for the bot's account
 
 GEMINI_API_KEY = os.getenv("GEMINI_API_KEY")
+# Get Gemini model name from .env, defaulting if not specified
+# You can change the default here or ensure GEMINI_MODEL_NAME is always in your .env
+GEMINI_MODEL_NAME = os.getenv("GEMINI_MODEL_NAME", "gemini-1.0-pro")
+
 
 # --- Static Bot Settings ---
 TARGET_SUBREDDITS = ["learnpython", "AskReddit", "testingground4bots", "BotTown", "jokes", "puns"]
-REPLY_INTERVAL_SECONDS = 15 * 60  # 15 minutes
+REPLY_INTERVAL_SECONDS = 15 * 60
 PROCESSED_ITEMS_FILE = "processed_items_gemini.txt"
 BOT_DISCLAIMER = "\n\n---\n\n*I'm All_Gas_No_Brakes, an AI bot with a penchant for puns and a byte of dark humor. This reply was auto-generated with Gemini.*"
 LOG_FILE = "bot_activity_log.txt"
@@ -32,7 +36,7 @@ LOG_FILE = "bot_activity_log.txt"
 def log_message(message):
     timestamp = time.strftime("%Y-%m-%d %H:%M:%S")
     full_log = f"[{timestamp}] {message}"
-    print(full_log)
+    print(full_log) # Also print to console (visible in screen/tmux)
     try:
         with open(LOG_FILE, "a", encoding="utf-8") as f:
             f.write(full_log + "\n")
@@ -52,19 +56,20 @@ except Exception as e:
 # --- Initialize Gemini ---
 gemini_model = None
 try:
-    if GEMINI_API_KEY and "YOUR_GEMINI_API_KEY" not in GEMINI_API_KEY and "AIzaSyC" in GEMINI_API_KEY : # Basic check
+    if GEMINI_API_KEY and "YOUR_GEMINI_API_KEY" not in GEMINI_API_KEY and "AIzaSyC" in GEMINI_API_KEY : # Basic check for placeholder
         genai.configure(api_key=GEMINI_API_KEY)
-        gemini_model = genai.GenerativeModel('gemini-pro')
-        log_message("Gemini API configured successfully.")
+        log_message(f"Configuring Gemini with model: {GEMINI_MODEL_NAME}")
+        gemini_model = genai.GenerativeModel(GEMINI_MODEL_NAME)
+        # To confirm model validity early, you could make a small, non-essential call here,
+        # but it will also become apparent on the first actual generation attempt.
+        log_message(f"Gemini API configured successfully with model {GEMINI_MODEL_NAME}.")
     else:
         log_message("Gemini API key is missing, a placeholder, or seems invalid. Please check .env file.")
 except Exception as e:
-    log_message(f"Error configuring Gemini API: {e}")
+    log_message(f"Error configuring Gemini API or model {GEMINI_MODEL_NAME}: {e}")
+    log_message("Please ensure the GEMINI_MODEL_NAME in your .env file is correct, supported, and you have access to it.")
 
-# --- Helper Functions (load_processed_items, save_processed_item, get_sentiment_score, generate_gemini_reply) ---
-# These functions remain largely the same as in the previous version.
-# For brevity, I'll include them compactly. Ensure they use log_message.
-
+# --- Helper Functions ---
 def load_processed_items():
     if not os.path.exists(PROCESSED_ITEMS_FILE):
         return set()
@@ -84,14 +89,12 @@ def save_processed_item(item_id):
 
 def get_sentiment_score(text):
     if not sid:
-        # log_message("Sentiment analyzer not available. Cannot get score.") # Already logged if sid is None
         return 0 
     return sid.polarity_scores(text)['compound']
 
 def generate_gemini_reply(text_to_reply_to, context_title=""):
     if not gemini_model:
-        # log_message("Gemini model not initialized. Cannot generate reply.") # Already logged if gemini_model is None
-        return "My circuits are a bit tangled right now, can't generate a response."
+        return "My circuits are a bit tangled right now, can't generate a response." # Should be caught by initial checks
     prompt = f"""You are a Reddit bot persona: witty, casual, a genius, and a pun master.
     You have a taste for dark humor but know how to keep it clever and not overly offensive or explicit, respecting general content guidelines.
     Your goal is to generate an engaging comment related to the provided text.
@@ -104,36 +107,45 @@ def generate_gemini_reply(text_to_reply_to, context_title=""):
     Keep the comment concise, like a typical good Reddit comment.
     """
     try:
-        log_message(f"Generating Gemini reply for: \"{text_to_reply_to[:60].replace(os.linesep, ' ')}...\"")
+        log_message(f"Generating Gemini reply using {GEMINI_MODEL_NAME} for: \"{text_to_reply_to[:60].replace(os.linesep, ' ')}...\"")
         response = gemini_model.generate_content(prompt)
         if hasattr(response, 'text') and response.text:
             return response.text.strip()
         elif response.parts:
              return "".join(part.text for part in response.parts).strip()
         else:
-            log_message("Gemini API response did not contain text or parts.")
+            log_message(f"Gemini API response (model {GEMINI_MODEL_NAME}) did not contain text or parts.")
             if hasattr(response, 'candidates') and response.candidates and response.candidates[0].finish_reason != 'STOP':
                 log_message(f"Gemini generation stopped due to: {response.candidates[0].finish_reason}")
                 if response.candidates[0].safety_ratings:
                     log_message(f"Safety Ratings: {response.candidates[0].safety_ratings}")
             return "My pun generator just blue-screened. Try again later!"
     except Exception as e:
-        log_message(f"Error calling Gemini API: {e}")
+        log_message(f"Error calling Gemini API with model {GEMINI_MODEL_NAME}: {e}")
         return "My AI brain just short-circuited. I'll be back!"
 
 # --- Main Bot Logic ---
 def run_bot():
-    if not all([REDDIT_APP_CLIENT_ID, REDDIT_APP_CLIENT_SECRET, REDDIT_APP_USER_AGENT, REDDIT_BOT_USERNAME, REDDIT_BOT_PASSWORD]):
-        log_message("CRITICAL ERROR: One or more Reddit credentials (client ID, secret, user agent, bot username, bot password) are missing from .env file.")
-        return
-    if not GEMINI_API_KEY or "YOUR_GEMINI_API_KEY" in GEMINI_API_KEY: # Simple check
-        log_message("CRITICAL ERROR: Gemini API Key is missing or a placeholder in .env file.")
-        return
+    # Initial checks for essential configurations
+    essential_configs = {
+        "REDDIT_APP_CLIENT_ID": REDDIT_APP_CLIENT_ID,
+        "REDDIT_APP_CLIENT_SECRET": REDDIT_APP_CLIENT_SECRET,
+        "REDDIT_APP_USER_AGENT": REDDIT_APP_USER_AGENT,
+        "REDDIT_BOT_USERNAME": REDDIT_BOT_USERNAME,
+        "REDDIT_BOT_PASSWORD": REDDIT_BOT_PASSWORD,
+        "GEMINI_API_KEY": GEMINI_API_KEY,
+        "GEMINI_MODEL_NAME": GEMINI_MODEL_NAME
+    }
+    for config_name, config_value in essential_configs.items():
+        if not config_value or "YOUR_" in config_value.upper() or config_value == "placeholder_value": # Add more placeholder checks if needed
+            log_message(f"CRITICAL ERROR: Configuration for '{config_name}' is missing, a placeholder, or invalid in .env file.")
+            return
+            
     if not sid:
         log_message("CRITICAL ERROR: Sentiment analyzer (VADER) failed to load. Ensure NLTK data is downloaded.")
         return
-    if not gemini_model:
-        log_message("CRITICAL ERROR: Gemini model failed to initialize. Check API key and internet connection.")
+    if not gemini_model: 
+        log_message("CRITICAL ERROR: Gemini model failed to initialize. Check API key, model name in .env, internet, and previous logs.")
         return
 
     log_message("Initializing Reddit instance...")
@@ -142,16 +154,18 @@ def run_bot():
             client_id=REDDIT_APP_CLIENT_ID,
             client_secret=REDDIT_APP_CLIENT_SECRET,
             user_agent=REDDIT_APP_USER_AGENT,
-            username=REDDIT_BOT_USERNAME,  # This is the account the bot will post AS
-            password=REDDIT_BOT_PASSWORD   # The password for the account the bot will post AS
+            username=REDDIT_BOT_USERNAME,
+            password=REDDIT_BOT_PASSWORD
         )
         me = reddit.user.me()
+        # Check if login was successful and if the logged-in user matches the expected bot username
         if me is None or me.name.lower() != REDDIT_BOT_USERNAME.lower():
-            log_message(f"Failed to log in to Reddit as {REDDIT_BOT_USERNAME}. reddit.user.me() returned '{me.name if me else 'None'}'. Check bot credentials in .env and account status.")
+            actual_user = me.name if me else "None"
+            log_message(f"CRITICAL ERROR: Failed to log in to Reddit as the expected bot user '{REDDIT_BOT_USERNAME}'. Logged in as '{actual_user}'. Check REDDIT_BOT_USERNAME and REDDIT_BOT_PASSWORD in .env file and the bot account's status on Reddit.")
             return
-        log_message(f"Successfully logged in as Reddit user: {me.name}")
+        log_message(f"Successfully logged in to Reddit as: {me.name}")
     except Exception as e:
-        log_message(f"Failed to log in to Reddit: {e} (Type: {type(e).__name__})")
+        log_message(f"CRITICAL ERROR: Failed to log in to Reddit: {e} (Type: {type(e).__name__})")
         return
 
     processed_items = load_processed_items()
@@ -167,10 +181,10 @@ def run_bot():
             
             replied_in_cycle = False
 
-            for post in subreddit.hot(limit=15):
+            for post in subreddit.hot(limit=15): # Get some hot posts
                 if post.id in processed_items or post.stickied:
                     continue
-                if post.author and post.author.name.lower() == REDDIT_BOT_USERNAME.lower(): # Check against bot's operating username
+                if post.author and post.author.name.lower() == REDDIT_BOT_USERNAME.lower():
                     continue
                 if post.archived or post.locked:
                     continue
@@ -179,19 +193,19 @@ def run_bot():
                 sentiment = get_sentiment_score(post_content_for_sentiment)
                 log_message(f"Post '{post.title[:30].replace(os.linesep, ' ')}...' (ID: {post.id}) sentiment: {sentiment:.2f}")
 
-                if sentiment < -0.2:
+                if sentiment < -0.2: # Avoid very negative posts
                     log_message(f"Skipping post {post.id} due to negative sentiment ({sentiment:.2f}).")
                     save_processed_item(post.id)
                     continue
                 
-                post.comments.replace_more(limit=0) 
+                post.comments.replace_more(limit=0) # Load top-level comments
                 comments_to_consider = [
-                    c for c in post.comments.list()[:20] 
-                    if c.author and c.author.name.lower() != REDDIT_BOT_USERNAME.lower() and c.id not in processed_items and not c.stickied # Check against bot's operating username
+                    c for c in post.comments.list()[:20] # Look at more comments
+                    if c.author and c.author.name.lower() != REDDIT_BOT_USERNAME.lower() and c.id not in processed_items and not c.stickied
                 ]
 
                 if not comments_to_consider:
-                    continue
+                    continue # Try next post if no suitable comments on this one
                 
                 target_comment = random.choice(comments_to_consider)
                 log_message(f"Selected comment (ID: {target_comment.id}) by u/{target_comment.author.name if target_comment.author else '[deleted]'} under post '{post.title[:30].replace(os.linesep, ' ')}...'")
@@ -213,48 +227,49 @@ def run_bot():
                         save_processed_item(target_comment.id)
                         processed_items.add(target_comment.id)
                         replied_in_cycle = True
-                        time.sleep(10) 
-                        break 
+                        time.sleep(10) # Pause after successful reply
+                        break # Break from posts loop after one reply in cycle to wait for main interval
                     except praw.exceptions.APIException as e:
                         log_message(f"Reddit API Exception while replying to comment {target_comment.id}: {e}")
                         if "RATELIMIT" in str(e).upper():
                             log_message("Rate limit hit. Sleeping for 5 minutes.")
-                            time.sleep(300)
+                            time.sleep(300) # Sleep longer if rate limited
                         elif any(err_str in str(e).upper() for err_str in ["DELETED_COMMENT", "TOO_OLD", "THREAD_LOCKED", "COMMENT_DELETED", "NOT_AUTHOR", "PARENT_DELETED"]):
                             log_message(f"Comment/Post issue for {target_comment.id}. Marking comment as processed.")
                             save_processed_item(target_comment.id)
-                        else: 
-                            log_message(f"Unhandled API exception for {target_comment.id}. Marking as processed.")
+                        else: # Other API errors
+                            log_message(f"Unhandled API exception for {target_comment.id}. Marking as processed to avoid loop on error.")
                             save_processed_item(target_comment.id)
                     except Exception as e:
                         log_message(f"An unexpected error occurred while replying to comment {target_comment.id}: {e}")
-                        save_processed_item(target_comment.id) 
+                        save_processed_item(target_comment.id) # Mark as processed to avoid retrying faulty comment
                 else:
-                    log_message(f"Gemini did not generate a suitable reply for comment {target_comment.id}.")
-                    save_processed_item(target_comment.id)
+                    log_message(f"Gemini (model {GEMINI_MODEL_NAME}) did not generate a suitable reply for comment {target_comment.id}.")
+                    save_processed_item(target_comment.id) # Mark as processed if AI fails
                 
-                time.sleep(random.uniform(2,5))
+                time.sleep(random.uniform(2,5)) # Small random delay between checking comments/posts if no reply was made
 
             if not replied_in_cycle:
-                log_message("No new suitable posts/comments found to reply to in this cycle.")
+                log_message("No new suitable posts/comments found to reply to in this cycle across scanned posts.")
 
-            log_message(f"--- Cycle finished. Waiting for {REPLY_INTERVAL_SECONDS // 60} minutes. ---")
+            log_message(f"--- Cycle finished. Waiting for {REPLY_INTERVAL_SECONDS // 60} minutes ({REPLY_INTERVAL_SECONDS}s) before next scan. ---")
             time.sleep(REPLY_INTERVAL_SECONDS)
 
-        except praw.exceptions.PRAWException as e:
-            log_message(f"A PRAW specific error occurred: {e}")
+        except praw.exceptions.PRAWException as e: # More general PRAW errors
+            log_message(f"A PRAW specific error occurred in the main loop: {e}")
             log_message("Sleeping for 60 seconds before retrying...")
             time.sleep(60)
         except KeyboardInterrupt:
             log_message("KeyboardInterrupt received. Shutting down bot...")
-            break
+            break # Exit the while True loop
         except Exception as e:
-            log_message(f"An critical unexpected error in the main loop: {e} (Type: {type(e).__name__})")
+            log_message(f"An critical unexpected error occurred in the main loop: {e} (Type: {type(e).__name__})")
+            log_message("This could be a network issue, an unhandled API change, or a bug.")
             log_message("Sleeping for 5 minutes before retrying the loop...")
-            time.sleep(300)
+            time.sleep(300) # Sleep longer for major unknown issues
 
 if __name__ == "__main__":
     log_message("Starting Reddit Bot All_Gas_No_Brakes (dotenv version)...")
-    # Initial checks are now mostly at the start of run_bot()
+    # Initial configuration checks are now more robust and happen at the start of run_bot()
     run_bot()
     log_message("Bot script finished or exited.")
