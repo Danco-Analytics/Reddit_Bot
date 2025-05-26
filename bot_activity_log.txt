@@ -91,3 +91,56 @@
 [2025-05-26 03:54:56] Attempting to reply to comment mu8ndp5: "Well, I'm glad you're not letting this *shit* get you down. And yes, the bar has definitely been rai..."
 [2025-05-26 03:54:57] Successfully replied to comment ID mu8ndp5 in r/puns
 [2025-05-26 03:55:07] --- Cycle finished. Waiting for 15 minutes (900s) before next scan. ---
+[2025-05-26 03:58:30] SentimentIntensityAnalyzer loaded successfully.
+[2025-05-26 03:58:30] Configuring Gemini with model: gemini-2.0-flash-lite
+[2025-05-26 03:58:30] Gemini API configured successfully with model gemini-2.0-flash-lite.
+[2025-05-26 03:58:30] Starting Reddit Bot All_Gas_No_Brakes (dotenv version, no disclaimer)...
+[2025-05-26 03:58:30] Initializing Reddit instance...
+[2025-05-26 03:58:32] Successfully logged in to Reddit as: No_Court_5398
+[2025-05-26 03:58:32] Loaded 2 processed item IDs.
+[2025-05-26 03:58:32] --- Starting new scan cycle at 2025-05-26 03:58:32 ---
+[2025-05-26 03:58:32] Scanning subreddit: r/jokes
+[2025-05-26 03:58:33] Post 'A little girl and boy are figh...' (ID: 1kv8zbw) sentiment: 0.74
+[2025-05-26 03:58:33] Selected comment (ID: mu9hkg1) by u/WhatsHisNameHuh under post 'A little girl and boy are figh...'
+[2025-05-26 03:58:33] Upvoting comment ID mu9hkg1
+[2025-05-26 03:58:34] Generating Gemini reply using gemini-2.0-flash-lite for: "If a girl sleeps with 100 guys, she's a slut.  
+If a guy doe..."
+[2025-05-26 03:58:35] Attempting to reply to comment mu9hkg1: "Well, that escalated quickly! Seems like someone's got a *gender* bender of an opinion there. Perhap..."
+[2025-05-26 03:58:36] Reddit API Exception while replying to comment mu9hkg1: RATELIMIT: "Looks like you've been doing that a lot. Take a break for 6 minutes before trying again." on field 'ratelimit'
+[2025-05-26 03:58:36] Rate limit hit. Sleeping for 5 minutes.
+[2025-05-26 04:03:39] Post 'A young Italian girl was going...' (ID: 1kuxz3h) sentiment: 0.87
+[2025-05-26 04:03:39] Selected comment (ID: mu6arqh) by u/Outside-Dependent-90 under post 'A young Italian girl was going...'
+[2025-05-26 04:03:39] Upvoting comment ID mu6arqh
+[2025-05-26 04:03:40] Generating Gemini reply using gemini-2.0-flash-lite for: "🤣 love that.  Hate that I have to come up with 20 characters..."
+[2025-05-26 04:03:42] Attempting to reply to comment mu6arqh: "Ah, the tyranny of the character count! It's a real pain in the asterisks, isn't it? Makes you want ..."
+[2025-05-26 04:03:42] Reddit API Exception while replying to comment mu6arqh: RATELIMIT: "Looks like you've been doing that a lot. Take a break for 1 minute before trying again." on field 'ratelimit'
+[2025-05-26 04:03:42] Rate limit hit. Sleeping for 5 minutes.
+[2025-05-26 04:08:45] Post 'How does an alchemist make his...' (ID: 1kv5awu) sentiment: 0.00
+[2025-05-26 04:08:46] Selected comment (ID: mu7jdkd) by u/Ok_Way2102 under post 'How does an alchemist make his...'
+[2025-05-26 04:08:46] Upvoting comment ID mu7jdkd
+[2025-05-26 04:08:47] Generating Gemini reply using gemini-2.0-flash-lite for: "It’s his wife. He better know her...."
+[2025-05-26 04:08:49] Attempting to reply to comment mu7jdkd: "Well, *obviously* he uses the Philosopher's Stone... because she's looking for the *elixir* of life!..."
+[2025-05-26 04:08:50] Successfully replied to comment ID mu7jdkd in r/jokes
+[2025-05-26 04:09:00] --- Cycle finished. Waiting for 15 minutes before next scan. ---
+[2025-05-26 04:24:00] --- Starting new scan cycle at 2025-05-26 04:24:00 ---
+[2025-05-26 04:24:00] Scanning subreddit: r/BotTown
+[2025-05-26 04:24:00] An critical unexpected error in the main loop: received 404 HTTP response (Type: NotFound)
+[2025-05-26 04:29:00] --- Starting new scan cycle at 2025-05-26 04:29:00 ---
+[2025-05-26 04:29:00] Scanning subreddit: r/testingground4bots
+[2025-05-26 04:29:01] Post 'my babe...' (ID: 1kvdpji) sentiment: 0.00
+[2025-05-26 04:29:02] Post 'abe...' (ID: 1kvbu9j) sentiment: 0.00
+[2025-05-26 04:29:04] Post 'This is a test post from my bo...' (ID: 1kv6jxe) sentiment: 0.00
+[2025-05-26 04:29:04] Post 'What's your opinion on the lat...' (ID: 1ku83u4) sentiment: 0.70
+[2025-05-26 04:29:05] Post 'Test...' (ID: 1ktvrsu) sentiment: 0.00
+[2025-05-26 04:29:05] Post 'this is a beauty...' (ID: 1krior1) sentiment: 0.59
+[2025-05-26 04:29:06] Post 'Hello test...' (ID: 1kqjrcf) sentiment: 0.00
+[2025-05-26 04:29:07] Post 'Hello testy...' (ID: 1kqjvga) sentiment: 0.00
+[2025-05-26 04:29:07] Post 'Hello test...' (ID: 1kqjv7u) sentiment: 0.00
+[2025-05-26 04:29:08] Post 'Hello test...' (ID: 1kqjqxm) sentiment: 0.00
+[2025-05-26 04:29:08] Post 'Hello test...' (ID: 1kqjqre) sentiment: 0.00
+[2025-05-26 04:29:09] Post 'Hello test...' (ID: 1kqjopq) sentiment: 0.00
+[2025-05-26 04:29:09] Post 'Hello test...' (ID: 1kqjo0w) sentiment: 0.00
+[2025-05-26 04:29:10] Post 'Hello test...' (ID: 1kqjj4q) sentiment: 0.00
+[2025-05-26 04:29:10] Post 'Hello test...' (ID: 1kqixwy) sentiment: 0.00
+[2025-05-26 04:29:11] No new suitable posts/comments found to reply to in this cycle.
+[2025-05-26 04:29:11] --- Cycle finished. Waiting for 15 minutes before next scan. ---
