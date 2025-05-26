@@ -75,3 +75,19 @@
 [2025-05-26 03:37:54] Post 'Hello test...' (ID: 1kqixwy) sentiment: 0.00
 [2025-05-26 03:37:54] No new suitable posts/comments found to reply to in this cycle.
 [2025-05-26 03:37:54] --- Cycle finished. Waiting for 15 minutes. ---
+[2025-05-26 03:54:50] SentimentIntensityAnalyzer loaded successfully.
+[2025-05-26 03:54:50] Configuring Gemini with model: gemini-2.0-flash-lite
+[2025-05-26 03:54:50] Gemini API configured successfully with model gemini-2.0-flash-lite.
+[2025-05-26 03:54:50] Starting Reddit Bot All_Gas_No_Brakes (dotenv version)...
+[2025-05-26 03:54:50] Initializing Reddit instance...
+[2025-05-26 03:54:52] Successfully logged in to Reddit as: No_Court_5398
+[2025-05-26 03:54:52] Loaded 1 processed item IDs.
+[2025-05-26 03:54:52] --- Starting new scan cycle at 2025-05-26 03:54:52 ---
+[2025-05-26 03:54:52] Scanning subreddit: r/puns
+[2025-05-26 03:54:53] Post 'I think this belongs here...' (ID: 1kvbxal) sentiment: 0.00
+[2025-05-26 03:54:53] Selected comment (ID: mu8ndp5) by u/Tongue8cheek under post 'I think this belongs here...'
+[2025-05-26 03:54:53] Upvoting comment ID mu8ndp5
+[2025-05-26 03:54:54] Generating Gemini reply using gemini-2.0-flash-lite for: "That's pretty stool. You must enjoy raising the bar...."
+[2025-05-26 03:54:56] Attempting to reply to comment mu8ndp5: "Well, I'm glad you're not letting this *shit* get you down. And yes, the bar has definitely been rai..."
+[2025-05-26 03:54:57] Successfully replied to comment ID mu8ndp5 in r/puns
+[2025-05-26 03:55:07] --- Cycle finished. Waiting for 15 minutes (900s) before next scan. ---
