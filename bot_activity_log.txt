@@ -144,3 +144,24 @@ If a guy doe..."
 [2025-05-26 04:29:10] Post 'Hello test...' (ID: 1kqixwy) sentiment: 0.00
 [2025-05-26 04:29:11] No new suitable posts/comments found to reply to in this cycle.
 [2025-05-26 04:29:11] --- Cycle finished. Waiting for 15 minutes before next scan. ---
+[2025-05-26 13:51:20] SentimentIntensityAnalyzer loaded successfully.
+[2025-05-26 13:51:20] Configuring Gemini with model: gemini-2.0-flash-lite
+[2025-05-26 13:51:20] Gemini API configured successfully with model gemini-2.0-flash-lite.
+[2025-05-26 13:51:20] Starting Reddit Bot All_Gas_No_Brakes (dotenv version, no disclaimer)...
+[2025-05-26 13:51:20] Initializing Reddit instance...
+[2025-05-26 13:51:26] CRITICAL ERROR: Failed to log in to Reddit: received 403 HTTP response (Type: Forbidden)
+[2025-05-26 13:51:26] Bot script finished or exited.
+[2025-05-26 13:51:50] SentimentIntensityAnalyzer loaded successfully.
+[2025-05-26 13:51:50] Configuring Gemini with model: gemini-2.0-flash-lite
+[2025-05-26 13:51:50] Gemini API configured successfully with model gemini-2.0-flash-lite.
+[2025-05-26 13:51:50] Starting Reddit Bot All_Gas_No_Brakes (dotenv version, no disclaimer)...
+[2025-05-26 13:51:50] Initializing Reddit instance...
+[2025-05-26 13:51:52] CRITICAL ERROR: Failed to log in to Reddit: received 403 HTTP response (Type: Forbidden)
+[2025-05-26 13:51:52] Bot script finished or exited.
+[2025-05-26 13:54:53] SentimentIntensityAnalyzer loaded successfully.
+[2025-05-26 13:54:53] Configuring Gemini with model: gemini-2.0-flash-lite
+[2025-05-26 13:54:53] Gemini API configured successfully with model gemini-2.0-flash-lite.
+[2025-05-26 13:54:53] Starting Reddit Bot All_Gas_No_Brakes (dotenv version, no disclaimer)...
+[2025-05-26 13:54:53] Initializing Reddit instance...
+[2025-05-26 13:54:56] CRITICAL ERROR: Failed to log in to Reddit: received 403 HTTP response (Type: Forbidden)
+[2025-05-26 13:54:56] Bot script finished or exited.
